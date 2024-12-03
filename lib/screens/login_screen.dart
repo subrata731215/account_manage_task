@@ -1,3 +1,4 @@
+import 'package:account_management_task/controller/controller.dart';
 import 'package:account_management_task/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,8 +6,15 @@ import 'package:get/get.dart';
 import '../reusable_widgets/app_filled_button.dart';
 import '../reusable_widgets/app_textfields.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  AppController controller = Get.put(AppController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +29,25 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(fontSize: 30),
             ),
             const SizedBox(height: 40),
-            AppTextfields(onChanged: (value) {}, hintText: 'Email'),
+            AppTextfields(
+                onChanged: (value) {
+                  controller.logInMobile.value = value;
+                },
+                hintText: 'Mobile'),
             const SizedBox(height: 10),
-            AppTextfields(onChanged: (value) {}, hintText: 'Password'),
+            AppTextfields(
+                onChanged: (value) {
+                  controller.logInPassword.value = value;
+                },
+                hintText: 'Password'),
             const SizedBox(height: 10),
             AppFilledButton(
               text: 'LogIn',
-              onPressed: () {},
+              onPressed: () {
+                for (int i = 0; i < controller.registerUserList.length; i++) {
+                  controller.userLogin(i, context);
+                }
+              },
             ),
             const SizedBox(height: 40),
             Row(

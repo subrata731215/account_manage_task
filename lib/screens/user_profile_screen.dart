@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../controller/controller.dart';
 import '../model/user_hive_model.dart';
 import '../reusable_widgets/app_filled_button.dart';
@@ -49,7 +48,9 @@ class UserProfileScreen extends StatelessWidget {
               ProfilePhotoWidget(
                 heightWidth: 100,
                 image: image,
-                onTap: () {},
+                onTap: () {
+                  controller.getImage();
+                },
               ),
               const SizedBox(height: 20),
               ProfileDetails(

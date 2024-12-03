@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../hive_services/hive_services.dart';
 import '../model/user_hive_model.dart';
 import '../screens/account_screen.dart';
 
+var formKey = GlobalKey<FormState>();
+
 class AppController extends GetxController {
   final registerUserList = <UserHiveModel>[].obs;
   final hiveServices = HiveServices();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Future<void> updateUserList() async {
     registerUserList.value = await HiveServices().getUser();
@@ -22,8 +24,27 @@ class AppController extends GetxController {
   RxString cPassword = ''.obs;
   RxString imagePath = ''.obs;
 
+  RxString logInMobile = ''.obs;
+  RxString logInPassword = ''.obs;
+
+  void userLogin(int index, BuildContext context) {
+    if (registerUserList[index].mobileNo == logInMobile.value &&
+        registerUserList[index].password == logInPassword.value) {
+      Get.snackbar('LogIn Successful', 'Welcome!');
+      Get.to(const AccountScreen());
+      Get.closeCurrentSnackbar();
+    } else {
+      Get.snackbar('Did not match Mobile no or Password', 'Please Try again!!');
+    }
+  }
+
   void addUser() async {
-    if (password.value == cPassword.value && password.value.length > 5) {
+    if (password.value == cPassword.value &&
+        password.value.length > 5 &&
+        firstName.value.length > 2 &&
+        lastName.value.length > 3 &&
+        mobileNo.value.length == 10 &&
+        email.value.length > 4) {
       hiveServices.addUser(
         UserHiveModel(
           firstName: firstName.value,
@@ -38,8 +59,9 @@ class AppController extends GetxController {
       Get.snackbar('Register Successful', 'Thank You!');
       updateUserList();
       Get.to(const AccountScreen());
+      Get.closeCurrentSnackbar();
     } else {
-      Get.snackbar('Password did not match', 'Please give same password ');
+      Get.snackbar('Fill all the details', 'try again ');
     }
   }
 

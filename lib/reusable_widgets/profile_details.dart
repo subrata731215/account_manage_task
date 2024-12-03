@@ -25,11 +25,10 @@ class ProfileDetails extends StatelessWidget {
         TextFormField(
           onChanged: onChanged,
           initialValue: hintText,
-          decoration: InputDecoration(
-              suffixIcon: const Icon(Icons.edit),
-              hintText: hintText,
-              border: const OutlineInputBorder(),
-              hintStyle: TextStyle(color: Colors.grey.shade600)),
+          decoration: const InputDecoration(
+            suffixIcon: Icon(Icons.edit),
+            border: OutlineInputBorder(),
+          ),
         ),
       ],
     );

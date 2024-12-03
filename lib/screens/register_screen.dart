@@ -27,7 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
       body: Form(
-        key: controller.formKey,
+        key: formKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: SingleChildScrollView(
           child: Padding(

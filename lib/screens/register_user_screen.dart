@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/controller.dart';
 import '../reusable_widgets/app_filled_button.dart';
-import '../reusable_widgets/app_textfields.dart';
+import '../reusable_widgets/app_text_fields.dart';
 import '../reusable_widgets/profile_photo_widget.dart';
-import 'login_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class RegisterUserScreen extends StatefulWidget {
+  const RegisterUserScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<RegisterUserScreen> createState() => _RegisterUserScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterUserScreenState extends State<RegisterUserScreen> {
   var controller = Get.put(AppController());
 
   @override
@@ -47,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: AppTextfields(
+                      child: AppTextFields(
                           onChanged: (value) {
                             controller.firstName.value = value;
                           },
@@ -55,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: AppTextfields(
+                      child: AppTextFields(
                           onChanged: (value) {
                             controller.lastName.value = value;
                           },
@@ -64,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                AppTextfields(
+                AppTextFields(
                   onChanged: (value) {
                     controller.mobileNo.value = value;
                   },
@@ -72,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   textInputType: TextInputType.number,
                 ),
                 const SizedBox(height: 10),
-                AppTextfields(
+                AppTextFields(
                   validator: (value) {
                     return controller.validEmail(value!);
                   },
@@ -83,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   textInputType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 10),
-                AppTextfields(
+                AppTextFields(
                   onChanged: (value) {
                     controller.password.value = value;
                   },
@@ -96,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   obscurePassword: true,
                 ),
                 const SizedBox(height: 10),
-                AppTextfields(
+                AppTextFields(
                   onChanged: (value) {
                     controller.cPassword.value = value;
                   },
@@ -117,24 +116,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('You have an account? '),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => const LoginScreen());
-                      },
-                      child: const Text(
-                        'Log In ',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),

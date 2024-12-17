@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../hive_services/hive_services.dart';
 import '../model/user_hive_model.dart';
-import '../screens/account_screen.dart';
+import '../screens/user_list_screen.dart';
 
 var formKey = GlobalKey<FormState>();
 
@@ -27,15 +27,10 @@ class AppController extends GetxController {
   RxString logInMobile = ''.obs;
   RxString logInPassword = ''.obs;
 
-  void userLogin(int index, BuildContext context) {
-    if (registerUserList[index].mobileNo == logInMobile.value &&
-        registerUserList[index].password == logInPassword.value) {
-      Get.snackbar('LogIn Successful', 'Welcome!');
-      Get.to(const AccountScreen());
-      Get.closeCurrentSnackbar();
-    } else {
-      Get.snackbar('Did not match Mobile no or Password', 'Please Try again!!');
-    }
+  UserHiveModel? userLogin() {
+    return registerUserList.firstWhereOrNull((user) {
+      return (user.mobileNo == logInMobile.value && user.password == logInPassword.value);
+    });
   }
 
   void addUser() async {
@@ -58,7 +53,7 @@ class AppController extends GetxController {
 
       Get.snackbar('Register Successful', 'Thank You!');
       updateUserList();
-      Get.to(const AccountScreen());
+      Get.to(const UserListScreen());
       Get.closeCurrentSnackbar();
     } else {
       Get.snackbar('Fill all the details', 'try again ');

@@ -6,16 +6,17 @@ import '../reusable_widgets/app_filled_button.dart';
 import '../reusable_widgets/profile_details.dart';
 import '../reusable_widgets/profile_photo_widget.dart';
 
-class UserProfileScreen extends StatelessWidget {
-  const UserProfileScreen(
-      {super.key,
-      required this.image,
-      required this.fName,
-      required this.lName,
-      required this.mobileNo,
-      required this.email,
-      required this.password,
-      required this.index});
+class UpdateUserScreen extends StatelessWidget {
+  const UpdateUserScreen({
+    super.key,
+    required this.image,
+    required this.fName,
+    required this.lName,
+    required this.mobileNo,
+    required this.email,
+    required this.password,
+    required this.index,
+  });
 
   final String image;
   final String fName;

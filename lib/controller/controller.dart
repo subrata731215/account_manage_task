@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../hive_services/hive_services.dart';
 import '../model/user_hive_model.dart';
-import '../screens/user_list_screen.dart';
+import '../screens/user_list_screen/user_list_screen.dart';
 
 var formKey = GlobalKey<FormState>();
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/controller.dart';
-import '../model/user_hive_model.dart';
-import '../reusable_widgets/app_filled_button.dart';
-import '../reusable_widgets/profile_details.dart';
-import '../reusable_widgets/profile_photo_widget.dart';
+import '../../controller/controller.dart';
+import '../../model/user_hive_model.dart';
+import '../../reusable_widgets/app_filled_button.dart';
+import '../../reusable_widgets/profile_details.dart';
+import '../../reusable_widgets/profile_photo_widget.dart';
 
 class UpdateUserScreen extends StatelessWidget {
   const UpdateUserScreen({
@@ -39,7 +39,7 @@ class UpdateUserScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Edit Details'),
+        title: const Text('Update User Screen'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

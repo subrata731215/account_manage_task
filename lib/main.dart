@@ -1,4 +1,4 @@
-import 'package:account_management_task/screens/user_list_screen.dart';
+import 'package:account_management_task/screens/user_list_screen/user_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';

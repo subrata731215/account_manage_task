@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/controller.dart';
-import '../reusable_widgets/app_filled_button.dart';
-import '../reusable_widgets/app_text_fields.dart';
-import '../reusable_widgets/profile_photo_widget.dart';
+import '../../controller/controller.dart';
+import '../../reusable_widgets/app_filled_button.dart';
+import '../../reusable_widgets/app_text_fields.dart';
+import '../../reusable_widgets/profile_photo_widget.dart';
 
 class RegisterUserScreen extends StatefulWidget {
   const RegisterUserScreen({super.key});

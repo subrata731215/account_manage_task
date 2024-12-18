@@ -1,11 +1,11 @@
-import 'package:account_management_task/screens/register_user_screen.dart';
-import 'package:account_management_task/screens/update_user_screen.dart';
+import 'package:account_management_task/screens/register_user_screen/register_user_screen.dart';
+import 'package:account_management_task/screens/update_user_screen/update_user_screen.dart';
 import 'package:account_management_task/utils/route_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/controller.dart';
-import '../reusable_widgets/profile_photo_widget.dart';
+import '../../controller/controller.dart';
+import '../../reusable_widgets/profile_photo_widget.dart';
 
 class UserListScreen extends StatefulWidget {
   const UserListScreen({super.key});
@@ -29,7 +29,8 @@ class _UserListScreenState extends State<UserListScreen> {
         appBar: AppBar(
           title: const Text(
             'Registered User',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, letterSpacing: 2),
+            style: TextStyle(
+                fontSize: 30, fontWeight: FontWeight.bold, letterSpacing: 2),
           ),
         ),
         floatingActionButton: FloatingActionButton(
@@ -60,10 +61,12 @@ class _UserListScreenState extends State<UserListScreen> {
                                   index: index,
                                 ));
                               },
-                              leading: ProfilePhotoWidget(heightWidth: 40, image: user.image),
+                              leading: ProfilePhotoWidget(
+                                  heightWidth: 40, image: user.image),
                               title: Text(
                                 '${user.firstName} ${user.lastName}',
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               subtitle: Text(
                                 '${user.mobileNo} & ${user.email}',

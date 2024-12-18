@@ -1,5 +1,5 @@
 import 'package:account_management_task/services/hive_services/hive_services.dart';
-import 'package:account_management_task/services/image/image_picker_service.dart';
+import 'package:account_management_task/services/image_picker_service/image_picker_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../model/user_hive_model.dart';

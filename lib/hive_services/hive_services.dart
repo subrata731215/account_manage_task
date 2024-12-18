@@ -6,7 +6,7 @@ class HiveServices {
   Box<UserHiveModel>? _userBox;
 
   Future<void> openBox() async {
-    _userBox = await Hive.openBox<UserHiveModel>('userDetails');
+    _userBox = await Hive.openBox<UserHiveModel>('user');
   }
 
   Future<void> closeBox() async {

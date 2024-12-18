@@ -1,10 +1,13 @@
+import 'package:account_management_task/screens/register_user_screen/controller/register_user_screen_controller.dart';
+import 'package:account_management_task/screens/update_user_screen/controller/update_user_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controller/controller.dart';
 import '../../model/user_hive_model.dart';
 import '../../reusable_widgets/app_filled_button.dart';
+import '../../reusable_widgets/common_method/image_get.dart';
 import '../../reusable_widgets/profile_details.dart';
 import '../../reusable_widgets/profile_photo_widget.dart';
+import '../user_list_screen/controller/user_list_screen_controller.dart';
 
 class UpdateUserScreen extends StatelessWidget {
   const UpdateUserScreen({
@@ -35,7 +38,13 @@ class UpdateUserScreen extends StatelessWidget {
       password: password,
       email: email,
     );
-    AppController controller = Get.put(AppController());
+    UpdateUserScreenController updateUserScreenController =
+        Get.put(UpdateUserScreenController());
+    RegisterUserScreenController registerUserScreenController =
+        Get.put(RegisterUserScreenController());
+    UserListScreenController userListScreenController =
+        Get.put(UserListScreenController());
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -50,7 +59,7 @@ class UpdateUserScreen extends StatelessWidget {
                 heightWidth: 100,
                 image: image,
                 onTap: () {
-                  controller.getImage();
+                  getImage(registerUserScreenController.imagePath.value);
                 },
               ),
               const SizedBox(height: 20),
@@ -92,7 +101,8 @@ class UpdateUserScreen extends StatelessWidget {
               AppFilledButton(
                   text: 'Saved Changes',
                   onPressed: () {
-                    controller.updateUser(index, tempUser);
+                    updateUserScreenController.updateUser(index, tempUser);
+                    userListScreenController.updateUserList();
                     Navigator.of(context).pop();
                   })
             ],

@@ -24,15 +24,6 @@ class AppController extends GetxController {
   RxString cPassword = ''.obs;
   RxString imagePath = ''.obs;
 
-  RxString logInMobile = ''.obs;
-  RxString logInPassword = ''.obs;
-
-  UserHiveModel? userLogin() {
-    return registerUserList.firstWhereOrNull((user) {
-      return (user.mobileNo == logInMobile.value && user.password == logInPassword.value);
-    });
-  }
-
   void addUser() async {
     if (password.value == cPassword.value &&
         password.value.length > 5 &&

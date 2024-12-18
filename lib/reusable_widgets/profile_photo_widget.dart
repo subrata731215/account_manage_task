@@ -18,13 +18,10 @@ class ProfilePhotoWidget extends StatelessWidget {
         height: heightWidth,
         width: heightWidth,
         decoration: BoxDecoration(
-            // image: DecorationImage(image: FileImage(image!), fit: BoxFit.cover),
             image: DecorationImage(
                 image: (image?.isNotEmpty ?? false)
                     ? FileImage(File(image!))
-                    : const NetworkImage(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNNLEL-qmmLeFR1nxJuepFOgPYfnwHR56vcw&s',
-                      ),
+                    : const AssetImage('images/no_image.jpg'),
                 fit: BoxFit.cover),
             color: Colors.grey,
             shape: BoxShape.circle,

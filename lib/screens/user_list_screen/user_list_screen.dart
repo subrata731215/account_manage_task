@@ -50,6 +50,7 @@ class _UserListScreenState extends State<UserListScreen> {
 
                           return Card(
                             child: ListTile(
+                              isThreeLine: true,
                               onTap: () {
                                 context.goto(UpdateUserScreen(
                                   image: user.image.toString(),
@@ -69,7 +70,7 @@ class _UserListScreenState extends State<UserListScreen> {
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                               subtitle: Text(
-                                '${user.mobileNo} & ${user.email}',
+                                '${user.mobileNo}\n${user.email}\nPassword : ${user.password}',
                                 style: const TextStyle(fontSize: 12),
                               ),
                               trailing: IconButton(

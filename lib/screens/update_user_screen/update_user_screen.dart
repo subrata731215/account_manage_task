@@ -1,13 +1,10 @@
-import 'package:account_management_task/screens/register_user_screen/controller/register_user_screen_controller.dart';
 import 'package:account_management_task/screens/update_user_screen/controller/update_user_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../model/user_hive_model.dart';
 import '../../reusable_widgets/app_filled_button.dart';
-import '../../reusable_widgets/common_method/image_get.dart';
 import '../../reusable_widgets/profile_details.dart';
 import '../../reusable_widgets/profile_photo_widget.dart';
-import '../user_list_screen/controller/user_list_screen_controller.dart';
 
 class UpdateUserScreen extends StatelessWidget {
   const UpdateUserScreen({
@@ -40,10 +37,6 @@ class UpdateUserScreen extends StatelessWidget {
     );
     UpdateUserScreenController updateUserScreenController =
         Get.put(UpdateUserScreenController());
-    RegisterUserScreenController registerUserScreenController =
-        Get.put(RegisterUserScreenController());
-    UserListScreenController userListScreenController =
-        Get.put(UserListScreenController());
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -59,7 +52,7 @@ class UpdateUserScreen extends StatelessWidget {
                 heightWidth: 100,
                 image: image,
                 onTap: () {
-                  getImage(registerUserScreenController.imagePath.value);
+                  //TODO: save imagePath in hive and update imagePath when user is updating.
                 },
               ),
               const SizedBox(height: 20),
@@ -102,7 +95,6 @@ class UpdateUserScreen extends StatelessWidget {
                   text: 'Saved Changes',
                   onPressed: () {
                     updateUserScreenController.updateUser(index, tempUser);
-                    userListScreenController.updateUserList();
                     Navigator.of(context).pop();
                   })
             ],

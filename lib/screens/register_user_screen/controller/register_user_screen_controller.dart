@@ -1,7 +1,8 @@
+import 'package:account_management_task/services/hive_services/hive_services.dart';
+import 'package:account_management_task/services/image/image_picker_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../hive_services/hive_services.dart';
 import '../../../model/user_hive_model.dart';
-import '../register_user_screen.dart';
 
 class RegisterUserScreenController extends GetxController {
   RxString firstName = ''.obs;
@@ -11,18 +12,15 @@ class RegisterUserScreenController extends GetxController {
   RxString password = ''.obs;
   RxString cPassword = ''.obs;
   RxString imagePath = ''.obs;
-
-
-
+  final registerFormKey = GlobalKey<FormState>();
 
   void addUserToHive() async {
     if (password.value == cPassword.value &&
         password.value.length > 5 &&
         firstName.value.length > 2 &&
-        lastName.value.length > 3 &&
         mobileNo.value.length == 10 &&
         email.value.length > 4) {
-      HiveServices().addUser(
+      HiveServices.instance.addUser(
         UserHiveModel(
           firstName: firstName.value,
           lastName: lastName.value,
@@ -31,11 +29,8 @@ class RegisterUserScreenController extends GetxController {
           email: email.value,
           image: imagePath.value,
         ),
-
       );
-
       Get.snackbar('Register Successful', 'Thank You!');
-
       // Get.to(const UserListScreen());
       Get.closeCurrentSnackbar();
     } else {
@@ -58,11 +53,16 @@ class RegisterUserScreenController extends GetxController {
   }
 
   void checkLogin() {
-    var isValid = formKey.currentState!.validate();
+    var isValid = registerFormKey.currentState!.validate();
     if (!isValid) {
       return;
     } else {
-      return formKey.currentState!.save();
+      return registerFormKey.currentState!.save();
     }
+  }
+
+  void pickImage() async {
+    final path = await ImagePickerService.instance.getImage();
+    if (path != null) imagePath.value = path;
   }
 }

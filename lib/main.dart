@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
-import 'hive_services/hive_services.dart';
+import 'services/hive_services/hive_services.dart';
 import 'model/user_hive_model.dart';
 
 void main() async {
@@ -11,7 +11,7 @@ void main() async {
   final dir = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(dir.path);
   Hive.registerAdapter(UserHiveModelAdapter());
-  await HiveServices().openBox();
+  await HiveServices.instance.openBox();
   runApp(const MyApp());
 }
 

@@ -14,12 +14,12 @@ class UserListScreen extends StatefulWidget {
 }
 
 class _UserListScreenState extends State<UserListScreen> {
-  UserListScreenController userListScreenController =
-      Get.put(UserListScreenController());
+  UserListScreenController userListScreenController = Get.put(UserListScreenController());
 
   @override
   void initState() {
     super.initState();
+    userListScreenController.updateUserList();
   }
 
   @override
@@ -34,7 +34,7 @@ class _UserListScreenState extends State<UserListScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => context.goto(const RegisterUserScreen()),
+          onPressed: () => context.gotoReplacement(const RegisterUserScreen()),
         ),
         body: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -47,17 +47,15 @@ class _UserListScreenState extends State<UserListScreen> {
                             child: Text('No User Registered'),
                           )
                         : ListView.builder(
-                            itemCount: userListScreenController
-                                .registerUserList.length,
+                            itemCount: userListScreenController.registerUserList.length,
                             itemBuilder: (context, index) {
-                              final user = userListScreenController
-                                  .registerUserList[index];
+                              final user = userListScreenController.registerUserList[index];
 
                               return Card(
                                 child: ListTile(
                                   isThreeLine: true,
                                   onTap: () {
-                                    context.goto(UpdateUserScreen(
+                                    context.gotoReplacement(UpdateUserScreen(
                                       image: user.image.toString(),
                                       fName: user.firstName,
                                       lName: user.lastName,
@@ -67,13 +65,10 @@ class _UserListScreenState extends State<UserListScreen> {
                                       index: index,
                                     ));
                                   },
-                                  leading: ProfilePhotoWidget(
-                                      heightWidth: 40, image: user.image),
+                                  leading: ProfilePhotoWidget(heightWidth: 40, image: user.image),
                                   title: Text(
                                     '${user.firstName} ${user.lastName}',
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
+                                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                   subtitle: Text(
                                     '${user.mobileNo}\n${user.email}\nPassword : ${user.password}',
@@ -81,8 +76,7 @@ class _UserListScreenState extends State<UserListScreen> {
                                   ),
                                   trailing: IconButton(
                                       onPressed: () {
-                                        userListScreenController
-                                            .deleteUser(user);
+                                        userListScreenController.deleteUser(user);
                                       },
                                       icon: const Icon(Icons.delete)),
                                 ),

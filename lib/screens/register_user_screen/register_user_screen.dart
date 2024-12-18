@@ -1,15 +1,11 @@
 import 'package:account_management_task/screens/register_user_screen/controller/register_user_screen_controller.dart';
-import 'package:account_management_task/screens/user_list_screen/controller/user_list_screen_controller.dart';
 import 'package:account_management_task/screens/user_list_screen/user_list_screen.dart';
 import 'package:account_management_task/utils/route_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../reusable_widgets/app_filled_button.dart';
 import '../../reusable_widgets/app_text_fields.dart';
-import '../../reusable_widgets/common_method/image_get.dart';
 import '../../reusable_widgets/profile_photo_widget.dart';
-
-var formKey = GlobalKey<FormState>();
 
 class RegisterUserScreen extends StatefulWidget {
   const RegisterUserScreen({super.key});
@@ -19,10 +15,7 @@ class RegisterUserScreen extends StatefulWidget {
 }
 
 class _RegisterUserScreenState extends State<RegisterUserScreen> {
-  RegisterUserScreenController registerController =
-      Get.put(RegisterUserScreenController());
-  UserListScreenController userListScreenController =
-      Get.put(UserListScreenController());
+  RegisterUserScreenController registerController = Get.put(RegisterUserScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +28,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
         ),
       ),
       body: Form(
-        key: formKey,
+        key: registerController.registerFormKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: SingleChildScrollView(
           child: Padding(
@@ -45,9 +38,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 Obx(() {
                   return ProfilePhotoWidget(
                     heightWidth: 100,
-                    onTap: () {
-                      getImage(registerController.imagePath.value);
-                    },
+                    onTap: registerController.pickImage,
                     image: registerController.imagePath.value,
                   );
                 }),
@@ -99,8 +90,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                   validator: (value) {
                     return registerController.validPassword(value!);
                   },
-                  suffixIcon: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.visibility_off)),
+                  suffixIcon: IconButton(onPressed: () {}, icon: const Icon(Icons.visibility_off)),
                   obscurePassword: true,
                 ),
                 const SizedBox(height: 10),
@@ -112,8 +102,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                   validator: (value) {
                     return registerController.validPassword(value!);
                   },
-                  suffixIcon: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.visibility_off)),
+                  suffixIcon: IconButton(onPressed: () {}, icon: const Icon(Icons.visibility_off)),
                   obscurePassword: true,
                 ),
                 const SizedBox(height: 10),
@@ -122,8 +111,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                   onPressed: () {
                     registerController.checkLogin();
                     registerController.addUserToHive();
-                    userListScreenController.updateUserList();
-                    context.goto(const UserListScreen());
+                    context.gotoReplacement(const UserListScreen());
                   },
                 ),
                 const SizedBox(height: 30),

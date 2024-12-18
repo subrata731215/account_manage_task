@@ -1,12 +1,15 @@
+import 'package:account_management_task/model/user_hive_model.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../model/user_hive_model.dart';
-
 class HiveServices {
+  HiveServices._();
+
+  static HiveServices instance = HiveServices._();
+
   Box<UserHiveModel>? _userBox;
 
   Future<void> openBox() async {
-    _userBox = await Hive.openBox<UserHiveModel>('userDetails');
+    _userBox = await Hive.openBox<UserHiveModel>('user');
   }
 
   Future<void> closeBox() async {

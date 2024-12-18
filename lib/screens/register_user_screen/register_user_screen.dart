@@ -1,9 +1,11 @@
+import 'package:account_management_task/screens/register_user_screen/controller/register_user_screen_controller.dart';
+import 'package:account_management_task/screens/user_list_screen/user_list_screen.dart';
+import 'package:account_management_task/utils/route_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/controller.dart';
-import '../reusable_widgets/app_filled_button.dart';
-import '../reusable_widgets/app_text_fields.dart';
-import '../reusable_widgets/profile_photo_widget.dart';
+import '../../reusable_widgets/app_filled_button.dart';
+import '../../reusable_widgets/app_text_fields.dart';
+import '../../reusable_widgets/profile_photo_widget.dart';
 
 class RegisterUserScreen extends StatefulWidget {
   const RegisterUserScreen({super.key});
@@ -13,7 +15,7 @@ class RegisterUserScreen extends StatefulWidget {
 }
 
 class _RegisterUserScreenState extends State<RegisterUserScreen> {
-  var controller = Get.put(AppController());
+  RegisterUserScreenController registerController = Get.put(RegisterUserScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
         ),
       ),
       body: Form(
-        key: formKey,
+        key: registerController.registerFormKey,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: SingleChildScrollView(
           child: Padding(
@@ -36,10 +38,8 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 Obx(() {
                   return ProfilePhotoWidget(
                     heightWidth: 100,
-                    onTap: () {
-                      controller.getImage();
-                    },
-                    image: controller.imagePath.value,
+                    onTap: registerController.pickImage,
+                    image: registerController.imagePath.value,
                   );
                 }),
                 const SizedBox(height: 20),
@@ -48,7 +48,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                     Expanded(
                       child: AppTextFields(
                           onChanged: (value) {
-                            controller.firstName.value = value;
+                            registerController.firstName.value = value;
                           },
                           hintText: 'FirstName'),
                     ),
@@ -56,7 +56,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                     Expanded(
                       child: AppTextFields(
                           onChanged: (value) {
-                            controller.lastName.value = value;
+                            registerController.lastName.value = value;
                           },
                           hintText: 'LastName'),
                     ),
@@ -65,7 +65,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 const SizedBox(height: 10),
                 AppTextFields(
                   onChanged: (value) {
-                    controller.mobileNo.value = value;
+                    registerController.mobileNo.value = value;
                   },
                   hintText: 'Mobile No',
                   textInputType: TextInputType.number,
@@ -73,10 +73,10 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 const SizedBox(height: 10),
                 AppTextFields(
                   validator: (value) {
-                    return controller.validEmail(value!);
+                    return registerController.validEmail(value!);
                   },
                   onChanged: (value) {
-                    controller.email.value = value;
+                    registerController.email.value = value;
                   },
                   hintText: 'Email',
                   textInputType: TextInputType.emailAddress,
@@ -84,35 +84,34 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 const SizedBox(height: 10),
                 AppTextFields(
                   onChanged: (value) {
-                    controller.password.value = value;
+                    registerController.password.value = value;
                   },
                   hintText: 'Password',
                   validator: (value) {
-                    return controller.validPassword(value!);
+                    return registerController.validPassword(value!);
                   },
-                  suffixIcon: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.visibility_off)),
+                  suffixIcon: IconButton(onPressed: () {}, icon: const Icon(Icons.visibility_off)),
                   obscurePassword: true,
                 ),
                 const SizedBox(height: 10),
                 AppTextFields(
                   onChanged: (value) {
-                    controller.cPassword.value = value;
+                    registerController.cPassword.value = value;
                   },
                   hintText: 'Confirm Password',
                   validator: (value) {
-                    return controller.validPassword(value!);
+                    return registerController.validPassword(value!);
                   },
-                  suffixIcon: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.visibility_off)),
+                  suffixIcon: IconButton(onPressed: () {}, icon: const Icon(Icons.visibility_off)),
                   obscurePassword: true,
                 ),
                 const SizedBox(height: 10),
                 AppFilledButton(
                   text: 'Register',
                   onPressed: () {
-                    controller.checkLogin();
-                    controller.addUser();
+                    registerController.checkLogin();
+                    registerController.addUserToHive();
+                    context.gotoReplacement(const UserListScreen());
                   },
                 ),
                 const SizedBox(height: 30),

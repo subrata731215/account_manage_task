@@ -1,10 +1,10 @@
+import 'package:account_management_task/screens/update_user_screen/controller/update_user_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controller/controller.dart';
-import '../model/user_hive_model.dart';
-import '../reusable_widgets/app_filled_button.dart';
-import '../reusable_widgets/profile_details.dart';
-import '../reusable_widgets/profile_photo_widget.dart';
+import '../../model/user_hive_model.dart';
+import '../../reusable_widgets/app_filled_button.dart';
+import '../../reusable_widgets/profile_details.dart';
+import '../../reusable_widgets/profile_photo_widget.dart';
 
 class UpdateUserScreen extends StatelessWidget {
   const UpdateUserScreen({
@@ -35,11 +35,13 @@ class UpdateUserScreen extends StatelessWidget {
       password: password,
       email: email,
     );
-    AppController controller = Get.put(AppController());
+    UpdateUserScreenController updateUserScreenController =
+        Get.put(UpdateUserScreenController());
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Edit Details'),
+        title: const Text('Update User Screen'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -50,7 +52,7 @@ class UpdateUserScreen extends StatelessWidget {
                 heightWidth: 100,
                 image: image,
                 onTap: () {
-                  controller.getImage();
+                  //TODO: save imagePath in hive and update imagePath when user is updating.
                 },
               ),
               const SizedBox(height: 20),
@@ -92,7 +94,7 @@ class UpdateUserScreen extends StatelessWidget {
               AppFilledButton(
                   text: 'Saved Changes',
                   onPressed: () {
-                    controller.updateUser(index, tempUser);
+                    updateUserScreenController.updateUser(index, tempUser);
                     Navigator.of(context).pop();
                   })
             ],
